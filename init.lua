@@ -8,7 +8,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
@@ -18,8 +18,25 @@ require("lazy").setup({
     "tpope/vim-sensible",
     "tpope/vim-surround",
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim"
+    "nvim-telescope/telescope.nvim",
+    "williamboman/mason.nvim",
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function () 
+        local configs = require("nvim-treesitter.configs")
+
+        configs.setup({
+            ensure_installed = { "lua", "vim", "vimdoc", "elixir", "bash" },
+            sync_install = false,
+            highlight = { enable = true },
+            indent = { enable = true },  
+        })
+        end
+    }
 })
+
+require("mason").setup()
 
 -- Remaps
 -- ------
@@ -32,5 +49,11 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- The rest
 -- --------
+
+vim.opt.smarttab = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
 vim.api.nvim_command("Ntree")
