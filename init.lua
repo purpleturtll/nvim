@@ -1,5 +1,5 @@
-# Pugins stuff
-# ------------
+-- Pugins stuff
+-- ------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -19,5 +19,5 @@ require("lazy").setup({
     "tpope/vim-surround"
 })
 
-# The rest
-# --------
+-- The rest
+-- --------
